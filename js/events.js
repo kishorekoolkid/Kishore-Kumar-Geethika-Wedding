@@ -9,7 +9,7 @@ window.setupEvents = function () {
     const where = key === 'wedding' ? `${c.wedding.venue}, ${c.wedding.address}` : key === 'live' ? 'YouTube Live' : e.venue;
     let extra = '';
     if (key === 'wedding') extra = `<p>Lunch: ${escapeHTML(c.wedding.lunch)}</p><a class="btn" target="_blank" rel="noopener noreferrer" href="${escapeHTML(c.wedding.mapsURL)}">View Venue on Map ↗</a>`;
-    if (key === 'live') extra = c.livestream.youtubeURL ? `<a class="btn" href="${escapeHTML(c.livestream.youtubeURL)}" target="_blank" rel="noopener noreferrer">Open YouTube Live ↗</a>` : '<p class="note">The livestream link will appear when you add it in js/config.js.</p>';
+    /*if (key === 'live') extra = c.livestream.youtubeURL ? `<a class="btn" href="${escapeHTML(c.livestream.youtubeURL)}" target="_blank" rel="noopener noreferrer">Open YouTube Live ↗</a>` : '<p class="note">The livestream link will appear when you add it in js/config.js.</p>';*/
     if (['mehendi', 'sangeet', 'reception'].includes(key) && /to be announced/i.test(when)) extra = '<p class="note">Event details will be announced soon.</p>';
     content.innerHTML = `<div class="detail-icon">${escapeHTML(e.icon)}</div><h2>${escapeHTML(e.name)}</h2><div class="divider">──── ✦ ────</div><p>${escapeHTML(e.description)}</p><p><strong>When:</strong> ${escapeHTML(when)}</p><p><strong>Where:</strong> ${escapeHTML(where)}</p>${extra}`;
     detail.scrollIntoView({ behavior: 'smooth' });
