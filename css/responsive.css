@@ -1,0 +1,2 @@
+/* Add mobile-only layout changes here. Existing responsive rules remain in style.css. */
+@media(max-width:650px){.event-nav{overflow-x:auto;scrollbar-width:thin;flex-wrap:nowrap;justify-content:flex-start}.event-nav button{flex-shrink:0}}
