@@ -10,7 +10,7 @@ window.setupGallery = async function () {
         .then(response => response.ok ? response.json() : null)
         .catch(() => null);
 
-    await Promise.all(Array.from(panels, async panel => {
+    const galleries = await Promise.all(Array.from(panels, async panel => {
         const folder = panel.dataset.photoFolder;
         const directory = new URL(`assets/${folder}/`, document.baseURI);
         const files = photoIndex?.[folder] ?? await listLocalGalleryPhotos(directory);
@@ -19,19 +19,39 @@ window.setupGallery = async function () {
             .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
             .map(file => new URL(encodeURIComponent(file), directory).href);
 
-        if (!photos.length) return;
-        const image = panel.querySelector('img');
-        image.alt = panel.querySelector('span').textContent;
-        image.src = photos[0];
-
-        if (photos.length < 2) return;
-        let next = 1;
-        setInterval(() => {
-            image.src = photos[next];
-            next = (next + 1) % photos.length;
-        }, 5000);
+        return { panel, photos, image: panel.querySelector('img'), index: 0 };
     }));
+
+    await showGalleryPhotos(galleries.filter(gallery => gallery.photos.length));
+    const rotating = galleries.filter(gallery => gallery.photos.length > 1);
+    if (!rotating.length) return;
+
+    while (true) {
+        for (const gallery of rotating) {
+            gallery.index = (gallery.index + 1) % gallery.photos.length;
+        }
+        await showGalleryPhotos(rotating, 5000);
+    }
 };
+
+async function showGalleryPhotos(galleries, delay = 0) {
+    const nextPhotos = galleries.map(async ({ panel, photos, image, index }) => {
+        const next = image.cloneNode(false);
+        next.alt = panel.querySelector('span').textContent;
+        next.src = photos[index];
+        return next.decode().then(() => next, () => null);
+    });
+    const [, ...ready] = await Promise.all([
+        delay && new Promise(resolve => setTimeout(resolve, delay)),
+        ...nextPhotos
+    ]);
+    galleries.forEach((gallery, index) => {
+        const image = ready[index];
+        if (!image) return;
+        gallery.image.replaceWith(image);
+        gallery.image = image;
+    });
+}
 
 async function listLocalGalleryPhotos(directory) {
     try {

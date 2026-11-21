@@ -46,7 +46,7 @@ Place photos directly in the folder for the panel you want to update.
 | `assets/newBeginning/` | Our beautiful beginning |
 | `assets/foreverTogether/` | Forever starts here |
 
-Each panel shows its photos in filename order, advancing every five seconds and looping back to the first. An empty folder shows the original illustration. Supported formats are AVIF, BMP, GIF, JPEG, PNG, SVG, and WebP.
+The panels advance together every five seconds. Each panel follows its own filename order and loops back to its first photo. An empty folder shows the original illustration. Supported formats are AVIF, BMP, GIF, JPEG, PNG, SVG, and WebP.
 
 Refresh the local preview to see newly added photos. For the live site, push the photos to the GitHub Pages publishing branch and refresh after GitHub Pages finishes publishing. No code or photo list edits are needed.
 
