@@ -1,0 +1,22 @@
+---
+layout: null
+---
+{%- assign folders = "ourMemories,newBeginning,foreverTogether" | split: "," -%}
+{
+{%- for folder in folders %}
+  {{ folder | jsonify }}: [
+    {%- assign prefix = "/assets/" | append: folder | append: "/" -%}
+    {%- assign separator = "" -%}
+    {%- for file in site.static_files -%}
+      {%- assign start = file.path | slice: 0, prefix.size -%}
+      {%- if start == prefix -%}
+        {%- assign name = file.path | remove_first: prefix -%}
+        {%- unless name contains "/" -%}
+          {{- separator -}}{{- name | jsonify -}}
+          {%- assign separator = "," -%}
+        {%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+  ]{% unless forloop.last %},{% endunless %}
+{%- endfor %}
+}

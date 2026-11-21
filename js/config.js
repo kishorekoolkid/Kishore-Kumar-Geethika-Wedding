@@ -1,4 +1,4 @@
-/* EDIT THIS FILE to update names, dates, venues, event schedules, gallery and livestream. */
+/* EDIT THIS FILE to update names, dates, venues, event schedules and livestream. */
 window.WEDDING_CONFIG = {
   couple: { bride: 'Geethika', groom: 'Kishore Kumar' },
   wedding: {
@@ -26,10 +26,5 @@ window.WEDDING_CONFIG = {
     wedding: { name: 'Wedding', icon: '✝', description: 'Join us as we celebrate our Christian wedding ceremony.' },
     reception: { name: 'Reception', icon: '✧', description: 'Celebrate the beginning of our new chapter together.', when: 'Monday, 21 December 2026 12:00 PM Onwards', venue: 'Venue to be announced' }
   },
-  livestream: { youtubeURL: 'https://youtube.com/live/ii-iFdDaSoI?feature=share', startISO: '2026-12-21T09:00:00+05:30' },
-  gallery: [
-    { image: 'assets/images/journey-memories.svg', caption: 'Our favourite memories' },
-    { image: 'assets/images/journey-together.svg', caption: 'Our beautiful beginning' },
-    { image: 'assets/images/journey-forever.svg', caption: 'Forever starts here' }
-  ]
+  livestream: { youtubeURL: 'https://youtube.com/live/ii-iFdDaSoI?feature=share',videoId: "WeddingVideoLive", startISO: '2026-12-21T09:00:00+05:30' }
 };

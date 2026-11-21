@@ -6,7 +6,7 @@
 |---|---|
 | Names, dates, wedding venue, Google Maps URL, event schedules | `js/config.js` |
 | YouTube Live watch URL and countdown start | `js/config.js` |
-| Gallery photos and captions | `js/config.js` and `assets/gallery/` |
+| Journey photos | `assets/ourMemories/`, `assets/newBeginning/`, and `assets/foreverTogether/` |
 | Welcome design/text | `pages/welcome.html` |
 | Invitation design/text | `pages/invitation.html` |
 | Event list layout | `pages/events.html` |
@@ -30,19 +30,25 @@ Or, with Python installed, open a terminal in this project folder and run:
 python -m http.server 8000
 ```
 
-Then visit `http://localhost:8000/`.
+Then visit `http://localhost:8000/`. Use the Python server or `preview.bat` to preview the photo loops, which need directory listings when running locally.
 
 ### Deploy to GitHub Pages
 
-Copy the *contents* of this folder (including `pages`, `js`, `css`, and `assets`) to the root of your existing GitHub Pages repository. Back up the old site first. The relative paths work with a GitHub Pages project URL. GitHub Pages serves the fragments without a build step.
+Copy the *contents* of this folder (including `pages`, `js`, `css`, and `assets`) to the root of your existing GitHub Pages repository. Back up the old site first. Publish from a branch with Jekyll enabled so GitHub Pages generates the gallery photo index on each publish. The relative paths work with a GitHub Pages project URL.
 
 ### Updating gallery
 
-Copy your photos to `assets/gallery/`. In `js/config.js` replace the example gallery entries, e.g.:
+Place photos directly in the folder for the panel you want to update.
 
-```js
-{image:'assets/gallery/our-photo.jpg', caption:'Our first adventure'}
-```
+| Folder | Journey panel |
+|---|---|
+| `assets/ourMemories/` | Our favourite memories |
+| `assets/newBeginning/` | Our beautiful beginning |
+| `assets/foreverTogether/` | Forever starts here |
+
+Each panel shows its photos in filename order, advancing every five seconds and looping back to the first. An empty folder shows the original illustration. Supported formats are AVIF, BMP, GIF, JPEG, PNG, SVG, and WebP.
+
+Refresh the local preview to see newly added photos. For the live site, push the photos to the GitHub Pages publishing branch and refresh after GitHub Pages finishes publishing. No code or photo list edits are needed.
 
 ### Important
 
