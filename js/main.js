@@ -1,6 +1,6 @@
 /* Loads each page from its own HTML file. Serve using a local HTTP server or GitHub Pages. */
 window.weddingReady = (async function () {
-  const names = ['welcome', 'invitation', 'events', 'detail', 'journey', 'venue', 'live'];
+  const names = ['welcome', 'invitation', 'events', 'journey', 'venue', 'live'];
   const main = document.getElementById('main');
   try {
     const sections = await Promise.all(names.map(async name => {
@@ -11,12 +11,48 @@ window.weddingReady = (async function () {
     main.innerHTML = sections.join('\n');
     applyWeddingDetails();
     window.setupEvents(); window.setupGallery(); window.setupLivestream();
+    setupSectionTransitions(main);
+    document.addEventListener('click', showGoldenGlitter);
     if (location.hash) requestAnimationFrame(() => document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView());
   } catch (error) {
     main.innerHTML = '<div class="loading-message"><h2>Unable to load invitation pages</h2><p>Run the included preview server (see README.md) or deploy to GitHub Pages. Opening index.html directly with file:// does not support HTML fragments in most browsers.</p></div>';
     console.error('Website load failed:', error);
   }
 })();
+function showGoldenGlitter() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const shower = document.createElement('div');
+  shower.className = 'glitter-shower';
+  shower.setAttribute('aria-hidden', 'true');
+  if (typeof shower.showPopover === 'function') shower.popover = 'manual';
+  for (let index = 0; index < 32; index++) {
+    const sparkle = document.createElement('span');
+    sparkle.className = 'glitter-sparkle';
+    sparkle.style.setProperty('--left', `${Math.random() * 100}%`);
+    sparkle.style.setProperty('--size', `${5 + Math.random() * 8}px`);
+    sparkle.style.setProperty('--drift', `${Math.random() * 100 - 50}px`);
+    sparkle.style.setProperty('--duration', `${1500 + Math.random() * 700}ms`);
+    sparkle.style.setProperty('--delay', `${Math.random() * 300}ms`);
+    shower.append(sparkle);
+  }
+  document.body.append(shower);
+  shower.showPopover?.();
+  setTimeout(() => shower.remove(), 2550);
+}
+
+function setupSectionTransitions(main) {
+  if (!('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      entry.target.classList.toggle('section-entering', entry.isIntersecting);
+    }
+  }, { rootMargin: '-24px 0px' });
+
+  main.querySelectorAll('.section').forEach(section => observer.observe(section));
+}
+
 function applyWeddingDetails() {
   const c = window.WEDDING_CONFIG, w = c.wedding;
   const text = (selector, value) => { document.querySelectorAll(selector).forEach(el => el.textContent = value) };
@@ -35,7 +71,5 @@ function applyWeddingDetails() {
   const maps = document.querySelector('#venue a[target="_blank"]'); if (maps) maps.href = w.mapsURL;
   const liveDate = document.querySelector('#live .extra-frame > p strong'); if (liveDate) liveDate.textContent = `${w.dateLabel} · ${w.time}`;
   const liveCouple = document.querySelector('#live .extra-frame > p:not(.section-kicker):not(.note)'); if (liveCouple) liveCouple.textContent = `${c.couple.bride} & ${c.couple.groom}`;
-  const eventList = document.getElementById('eventList');
-  if (eventList) eventList.innerHTML = Object.entries(c.events).map(([key, e]) => `<button type="button" data-event="${key}"><span class="event-icon">${escapeHTML(e.icon)}</span><span><b>${escapeHTML(e.name)}</b><small>${escapeHTML(key === 'wedding' || key === 'live' ? `${w.dateLabel} · ${w.time}` : e.when)}</small></span><span class="arrow">›</span></button>`).join('');
 }
 function escapeHTML(value) { return String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }

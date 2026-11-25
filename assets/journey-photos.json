@@ -1,7 +1,7 @@
 ---
 layout: null
 ---
-{%- assign folders = "ourMemories,newBeginning,foreverTogether" | split: "," -%}
+{%- assign folders = "ourMemories,newBeginning,foreverTogether,mehandi,sangeeth,reception" | split: "," -%}
 {
 {%- for folder in folders %}
   {{ folder | jsonify }}: [

@@ -1,1 +1,53 @@
-@media (prefers-reduced-motion: no-preference) { .detail-content { animation: fadeIn .4s ease both; } @keyframes fadeIn {from {opacity:0;transform:translateY(12px)} to {opacity:1;transform:translateY(0)}} }
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .section-entering > .frame {
+    animation: section-enter 480ms ease-out;
+  }
+
+  .glitter-shower {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .glitter-sparkle {
+    position: absolute;
+    top: -16px;
+    left: var(--left);
+    width: var(--size);
+    height: var(--size);
+    filter: drop-shadow(0 0 3px #eaa300);
+    animation: glitter-fall var(--duration) var(--delay) linear both;
+  }
+
+  .glitter-sparkle::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #fff8c4 8%, #ffc629 42%, #c47700 100%);
+    clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  }
+
+  @keyframes glitter-fall {
+    0% { opacity: 0; transform: translate3d(0, 0, 0) rotate(0deg); }
+    12%, 75% { opacity: 1; }
+    100% { opacity: 0; transform: translate3d(var(--drift), calc(100dvh + 24px), 0) rotate(280deg); }
+  }
+
+  @keyframes section-enter {
+    from { opacity: 0.65; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}

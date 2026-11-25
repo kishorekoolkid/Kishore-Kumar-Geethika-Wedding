@@ -1,8 +1,8 @@
-/* Each Journey panel rotates through the photos in its own folder. */
+/* Each photo panel rotates through the photos in its own folder. */
 const galleryImageExtension = /\.(avif|bmp|gif|jpe?g|png|svg|webp)$/i;
 
 window.setupGallery = async function () {
-    const panels = document.querySelectorAll('#journey [data-photo-folder]');
+    const panels = document.querySelectorAll('[data-photo-folder]');
     if (!panels.length) return;
 
     // GitHub Pages builds the index with Jekyll. Local preview can list directories.
@@ -37,7 +37,7 @@ window.setupGallery = async function () {
 async function showGalleryPhotos(galleries, delay = 0) {
     const nextPhotos = galleries.map(async ({ panel, photos, image, index }) => {
         const next = image.cloneNode(false);
-        next.alt = panel.querySelector('span').textContent;
+        next.alt = panel.dataset.photoAlt ?? panel.querySelector('span').textContent;
         next.src = photos[index];
         return next.decode().then(() => next, () => null);
     });

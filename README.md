@@ -9,8 +9,8 @@
 | Journey photos | `assets/ourMemories/`, `assets/newBeginning/`, and `assets/foreverTogether/` |
 | Welcome design/text | `pages/welcome.html` |
 | Invitation design/text | `pages/invitation.html` |
-| Event list layout | `pages/events.html` |
-| Event subpage layout | `pages/detail.html` and `js/events.js` |
+| Event gallery layout | `pages/events.html` and `js/events.js` |
+| Event photos | `assets/mehandi/`, `assets/sangeeth/`, and `assets/reception/` |
 | Our Journey layout | `pages/journey.html` |
 | Venue layout | `pages/venue.html` |
 | Livestream layout | `pages/live.html` |
@@ -46,13 +46,15 @@ Place photos directly in the folder for the panel you want to update.
 | `assets/newBeginning/` | Our beautiful beginning |
 | `assets/foreverTogether/` | Forever starts here |
 
+For the Wedding Events page, add photos to `assets/mehandi/`, `assets/sangeeth/`, or `assets/reception/`. The schedule below each viewer comes from `js/config.js`.
+
 The panels advance together every five seconds. Each panel follows its own filename order and loops back to its first photo. An empty folder shows the original illustration. Supported formats are AVIF, BMP, GIF, JPEG, PNG, SVG, and WebP.
 
 Refresh the local preview to see newly added photos. For the live site, push the photos to the GitHub Pages publishing branch and refresh after GitHub Pages finishes publishing. No code or photo list edits are needed.
 
 ### Important
 
-- Mehendi, Sangeet, and Reception details are intentionally unconfirmed placeholders.
+- Mehendi and Sangeet venues are listed as “Venue to be announced” until updated in the configuration.
 - Add the actual public YouTube watch URL to `livestream.youtubeURL` when known.
 - Do not place private credentials or stream keys in the website.
 - The Google Maps link is a search link, not a verified venue pin.
