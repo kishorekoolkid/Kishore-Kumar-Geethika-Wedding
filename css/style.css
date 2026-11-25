@@ -5,7 +5,12 @@
 
 .live-player { width: min(100%, 720px); aspect-ratio: 16 / 9; min-height: 200px; border: 0; border-radius: 16px; margin: 8px auto; }
 
-#welcome h1 { font-size: clamp(124px, 7vw, 60px); }
+#welcome .arch { container-type: inline-size; }
+#welcome h1 {
+  font-size: clamp(1.5rem, 9vw, 5.5rem);
+  font-size: clamp(1.5rem, 13cqi, 5.5rem);
+  overflow-wrap: anywhere;
+}
 
 .event-card h3 { margin: 0 0 10px; }
 .event-card p { margin: 10px 0; font-size: 1.125rem; overflow-wrap: anywhere; }

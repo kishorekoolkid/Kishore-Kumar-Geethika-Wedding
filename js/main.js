@@ -57,7 +57,8 @@ function applyWeddingDetails() {
   const c = window.WEDDING_CONFIG, w = c.wedding;
   const text = (selector, value) => { document.querySelectorAll(selector).forEach(el => el.textContent = value) };
   text('.brand b', `${c.couple.bride} & ${c.couple.groom}`);
-  text('#welcome h1', `${c.couple.bride} & ${c.couple.groom}`);
+  text('#welcomeBride', c.couple.bride);
+  text('#welcomeGroom', c.couple.groom);
   text('#invitation .couple', `${c.couple.bride} & ${c.couple.groom}`);
   text('#welcome .date', w.dateLabel.toUpperCase());
   const ceremony = document.querySelector('#invitation .ceremony');
