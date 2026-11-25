@@ -26,7 +26,7 @@ function showGoldenGlitter() {
   shower.className = 'glitter-shower';
   shower.setAttribute('aria-hidden', 'true');
   if (typeof shower.showPopover === 'function') shower.popover = 'manual';
-  for (let index = 0; index < 32; index++) {
+  for (let index = 0; index < 96; index++) {
     const sparkle = document.createElement('span');
     sparkle.className = 'glitter-sparkle';
     sparkle.style.setProperty('--left', `${Math.random() * 100}%`);
